@@ -45,12 +45,9 @@ public class AppCategoria extends JFrame implements ActionListener {
 
     private JLabel lbl_titulo, lbl_1, lbl_2, lbl_3, lbl_4, lbl_5, lbl_6, lbl_7;
 
-    private JTextField txt_dni, txt_nombre, txt_app, txt_apm, txt_sueldo;
+    private JTextField txt_id, txt_nombre;
 
     private JDateChooser dc_fn;
-
-    private JRadioButton rbt_genero_f, rbt_genero_m;
-    private ButtonGroup bg_genero;
 
     private JButton btn_nuevo, btn_agregar, btn_editar, btn_borrar, btn_cerrar;
 
@@ -86,17 +83,17 @@ public class AppCategoria extends JFrame implements ActionListener {
 
         lbl_1 = new JLabel();
         lbl_1.setText("ID");
-        lbl_1.setBounds(20, 50, 120, 25);
+        lbl_1.setBounds(135, 50, 120, 25);
 
-        txt_dni = new JTextField();
-        txt_dni.setBounds(150, 50, 80, 25);
+        txt_id = new JTextField();
+        txt_id.setBounds(150, 50, 80, 25);
 
         lbl_2 = new JLabel();
         lbl_2.setText("Nombre Categoria");
         lbl_2.setBounds(20, 80, 110, 25);
 
-        txt_app = new JTextField();
-        txt_app.setBounds(20, 110, 110, 25);
+        txt_nombre = new JTextField();
+        txt_nombre.setBounds(20, 110, 110, 25);
 
         
         btn_nuevo = new JButton();
@@ -138,9 +135,9 @@ public class AppCategoria extends JFrame implements ActionListener {
         // Agregar los controles al JFrame
         this.add(lbl_titulo);
         this.add(lbl_1);
-        this.add(txt_dni);
+        this.add(txt_id);
         this.add(lbl_2);
-        this.add(txt_app);
+        this.add(txt_nombre);
     
         this.add(btn_nuevo);
         this.add(btn_agregar);
@@ -151,8 +148,8 @@ public class AppCategoria extends JFrame implements ActionListener {
 
         ControladorTxt ctxt = new ControladorTxt();
 
-        txt_dni.addKeyListener(ctxt);
-        txt_app.addKeyListener(ctxt);
+        txt_id.addKeyListener(ctxt);
+        txt_nombre.addKeyListener(ctxt);
 
         ControladorClick click = new ControladorClick();
 
@@ -214,9 +211,9 @@ public class AppCategoria extends JFrame implements ActionListener {
 
         @Override
         public void keyTyped(KeyEvent e) {
-            if (e.getSource() == txt_dni && txt_dni.getText().length() == 5) {
+            if (e.getSource() == txt_id && txt_id.getText().length() == 5) {
                 e.consume();
-            } else if (e.getSource() == txt_app && txt_app.getText().length() == 25) {
+            } else if (e.getSource() == txt_nombre && txt_nombre.getText().length() == 25) {
                 e.consume();
             } 
         }
@@ -238,12 +235,12 @@ public class AppCategoria extends JFrame implements ActionListener {
         public void mouseClicked(MouseEvent e) {
             int num_fila = categorias.getSelectedRow();
             
-            txt_dni.setEditable(false);
+            txt_id.setEditable(false);
 
             String dni = (String) categorias.getValueAt(num_fila, 0);
             String app = (String) categorias.getValueAt(num_fila, 1);
-            txt_dni.setText(dni);
-            txt_app.setText(app);
+            txt_id.setText(dni);
+            txt_nombre.setText(app);
             
         }
     }
@@ -256,22 +253,22 @@ public class AppCategoria extends JFrame implements ActionListener {
         } else if (e.getSource() == btn_nuevo) {
             LimpiarDatos();
         } else {
-            if (txt_dni.getText().equals("")) {
+            if (txt_id.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Ingrese un ID");
-                txt_dni.requestFocus();
+                txt_id.requestFocus();
                 return;
             }
             
-            if (txt_app.getText().length() == 0){
+            if (txt_nombre.getText().length() == 0){
                 JOptionPane.showMessageDialog(null, "Ingrese una categoria");
-                txt_app.requestFocus();
+                txt_nombre.requestFocus();
                 return;
             }
             
             Categoria personal = new Categoria();
 
-            personal.setId_categoria(txt_dni.getText());
-            personal.setNombre_categoria(txt_app.getText());
+            personal.setId_categoria(txt_id.getText());
+            personal.setNombre_categoria(txt_nombre.getText());
             
             
             Connection cnx = null;
@@ -342,14 +339,14 @@ public class AppCategoria extends JFrame implements ActionListener {
     }
 
     private void LimpiarDatos() {
-        txt_dni.setEditable(true);
+        txt_id.setEditable(true);
 
         categorias.clearSelection();
 
-        txt_dni.setText("");
-        txt_app.setText("");
+        txt_id.setText("");
+        txt_nombre.setText("");
         
-        txt_dni.requestFocus();
+        txt_id.requestFocus();
     }
     
     public static void main(String[] args) {

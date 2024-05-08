@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class ConexionMySQL {
     private static final String CONTROLADOR = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/bd_libreria_java";
+    private static final String URL = "jdbc:mysql://localhost:3306/libreria";
     private static final String USER = "root";
     private static final String PWD = "";
     
